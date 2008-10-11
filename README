@@ -1,0 +1,17 @@
+configure_slicehost.sh is a basic shell script to prepare a remote 
+Slicehost Ubuntu 8.04 VPS for running production Ruby on Rails apps.
+
+The script is self contained and does not require any user input except 
+the password of your target slice. In the original version, you also
+need to update the target address of your slice from "fiveruns.slicehost.com"
+to the address of your account.  It will take your environment from 
+blank build to live, serving a sample “Hello World” application in 
+about 90 seconds.
+
+This is the original script from the FiveRuns blog post at:
+http://blog.fiveruns.com/2008/9/24/rails-automation-at-slicehost
+
+It's completely ripe for cleaning up, extending and customizing for 
+other Linux distros, hosting providers and application configurations.
+
+
