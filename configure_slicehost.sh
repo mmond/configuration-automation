@@ -6,6 +6,8 @@
 
 #    Make remote ssh connection   (substitue your target server's address)
 #  
+
+#	Edit the following line with your slice's IP or domain name
 ssh root@fiveruns.slicehost.com '
 
 #    Update Ubuntu package manager
