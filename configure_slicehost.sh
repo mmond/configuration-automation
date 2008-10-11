@@ -52,7 +52,7 @@ echo "Hello World" > app/views/welcome/hello.html.erb
 
 #    Download FiveRuns Manage  ** Installation and registration is run seperately **
 #    If you are new to FiveRuns, sign up for a free trial:  https://manage.fiveruns.com/signup
-#    After, you have created an account, just execute the installer that's downloaded here
+#    After, you have created an account, just execute the installer that is downloaded here
 #
 cd /tmp
 wget http://manage.fiveruns.com/system/downloads/client/manage-installer-linux-ubuntu-64bit-intel.sh
