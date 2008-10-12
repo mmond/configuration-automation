@@ -8,7 +8,7 @@
 #  
 
 #	Edit the following line with your slice's IP or domain name
-ssh root@fiveruns.slicehost.com '
+ssh root@YOURACCOUNT.slicehost.com '
 
 #    Update Ubuntu package manager
 #
