@@ -1,5 +1,17 @@
-configure_slicehost.sh is a basic shell script to prepare a remote 
-Slicehost Ubuntu 8.04 VPS for running production Ruby on Rails apps.
+configure_slicehost.sh is the original script from the FiveRuns blog 
+post at: http://blog.fiveruns.com/2008/9/24/rails-automation-at-slicehost  
+is a basic shell script to prepare a remote Slicehost Ubuntu 8.04 VPS 
+for running production Ruby on Rails 
+applications.
+
+It is available at: http://github.com/mmond.  It installed:
+ 	Ruby 1.8.6 
+	Rubygems 1.2
+	Rails 2.1.0
+	Sqlite3
+	MySQL 5.0.51a
+	Thin 0.8.2
+	Hello World example Rails application
 
 The script is self contained and does not require any user input except 
 the password of your target slice. In the original version, you also
@@ -8,10 +20,16 @@ to the address of your account.  It will take your environment from
 blank build to live, serving a sample “Hello World” application in 
 about 90 seconds.
 
-This is the original script from the FiveRuns blog post at:
-http://blog.fiveruns.com/2008/9/24/rails-automation-at-slicehost
-
 It's completely ripe for cleaning up, extending and customizing for 
 other Linux distros, hosting providers and application configurations.
 
+Currently in process is:  configure_slicehost_eldorado.sh which builds
+on the first script.  
+
+
+This version of script includes the above and:
+	nginx
+	Capistrano
+	Mongrel
+	Eldorado full stack community web application 	
 
