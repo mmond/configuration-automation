@@ -20,8 +20,8 @@ test:
 production:
   adapter: mysql
   database: eldorado_production
-  username: deploy
-  password: RSTRQDlsmm
+  username: root
+  password: 
   host: localhost
   session_key: eldorado_production
   secret: RSTRebtQxqDy4tgFooSw4Al3xHau4FErig 
