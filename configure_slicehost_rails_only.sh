@@ -44,32 +44,5 @@ gem install -v=2.1.0 rails --no-rdoc --no-ri
 gem install mysql  --no-rdoc --no-ri
 gem install tzinfo mysql thin --no-rdoc --no-ri
 
-#   Configure a simple Rails Application
-#
-mkdir /var/www/
-cd /var/www
-rails hello
-cd hello
-./script/generate controller welcome hello
-echo "Hello World" > app/views/welcome/hello.html.erb
-
-#   Download FiveRuns Manage  ** Installation and registration is run seperately **
-#   If you are new to FiveRuns, sign up for a free trial:  https://manage.fiveruns.com/signup
-#   After, you have created an account, just execute the installer that is downloaded here
-#
-cd /tmp
-wget http://manage.fiveruns.com/system/downloads/client/manage-installer-linux-ubuntu-64bit-intel.sh
-
-#   Install the Manage gem and echoe gem dependency
-#
-gem install fiveruns_manage --source http://gems.fiveruns.com
-gem install echoe --no-ri --no-rdoc
-
-#   Install, configure and start the Thin web server
-#
-thin install
-/usr/sbin/update-rc.d -f thin defaults
-thin -p 80 config -C /etc/thin/hello.yml -c /var/www/hello
-/etc/init.d/thin start
 '
 

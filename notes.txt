@@ -1,0 +1,27 @@
+Local client Prerequisites:  git, Capistrano, ssh
+
+
+Check file permissions on dirs Cap creates, since you are root.
+
+cap deploy:setup	## This will fail if permissions are not set 
+cap deploy:check 	## Check and see how dependencies responds on 8.04
+
+(so both above look good)
+
+1. Have you created a database for your application? 
+(Capistrano doesn't do that?)
+
+2. Have you added a “production” section to your config/database.yml file?
+(ya.  Eldorado does and I'm including an updated and pre-configured copy )
+
+3. Have you set adequate permissions on that database for your application? 
+(again, no Cap?  Rake does.  I guess I need to add an ssh handler for this)
+
+Hmmm.  Capistrano does not copy files between the client server.  Looks like this is all handled via source control checkins from client to SCM and checkouts from SCM to server.
+
+The server will need a public key installed to the SCM for anything non-public.
+
+
+
+To do:
+configure nginx

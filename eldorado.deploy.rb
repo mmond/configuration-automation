@@ -6,7 +6,7 @@ set :deploy_via, :copy
 set :git_shallow_clone, 1
 
 set :application, 'eldorado'
-set :deploy_to, '/var/www/eldorado'
+set :deploy_to, '/var/www/el-dorado'
 set :mongrel_port, '8000'
 set :user, 'root'
 set :use_sudo, false  # We are already root in this example

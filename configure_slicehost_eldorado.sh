@@ -17,20 +17,25 @@
 #		nginx
 #		Capistrano
 #		Mongrel
-#		Eldorado full stack community web portal   ###########  ???????????
-
-
-#	To execute the script, cd to the parent directory of where you'd like the local copy of the Rails apps.
-#	Hello World will install to ./hello and Eldorado will install to ./eldorado
-
- 
+#		Eldorado full stack community web portal  
+#	
 
 #	Edit the following line with your slice's IP or domain name
 TARGET='YOURACCOUNT.slicehost.com'		# e.g. fiveruns.slicehost.com
 
+#	Create local repository for Eldorado.  configure_slicehost_eldorado.sh will download  
+#	Eldorado from Github to ~/el-dorado 
+git clone git://github.com/trevorturk/el-dorado.git
+#	Update the deploy.rb file.  !!!!!!!!!!!!!!!!!!!!!!!!!!!For now we'll use a manually edited YOURACCOUNT.slicehost.com    !!!!!!!!!!!!!!!!!!!!!!!!!
+#	Use the Eldorado application directory structure.  Doing this now allows us to copy the preconfigured database.yml
+cap deploy:setup
+
 #	Make remote ssh connection
 # 	Replace YOURACOUNTNAME with your target server IP or domain name  
 ssh root@$YOURACCOUNT.slicehost.com '
+
+#	Add alias for ll	(Dear Ubuntu: This should be default)
+echo "alias \"ll=ls -lAgh\"" >> /root/.profile
 
 #    Update Ubuntu package manager
 #
@@ -42,6 +47,7 @@ apt-get upgrade -y
 apt-get -y install build-essential libssl-dev libreadline5-dev zlib1g-dev  
 apt-get -y install libsqlite-dev libsqlite3-ruby libsqlite3-dev 
 apt-get -y install mysql-server libmysqlclient15-dev mysql-client 
+apt-get -y install git-core locate nginx
 
 #    Install Ruby 
 #
@@ -60,21 +66,11 @@ ln -s /usr/bin/gem1.8 /usr/bin/gem
 #    Install gems
 # 
 gem install -v=2.1.0 rails --no-rdoc --no-ri  
-gem install mysql  --no-rdoc --no-ri
-gem install tzinfo mysql thin --no-rdoc --no-ri
-
-#    Configure a simple Rails Application
-#
-mkdir /var/www/
-cd /var/www
-rails hello
-cd hello
-./script/generate controller welcome hello
-echo "Hello World" > app/views/welcome/hello.html.erb
+gem install mysql mongrel tzinfo thin --no-rdoc --no-ri
 
 #    Download FiveRuns Manage  ** Installation and registration is run seperately **
-#    If are new to FiveRuns, sign up for a free trial:  https://manage.fiveruns.com/signup
-#    After, you have created an account, just execute the installer below
+#    If are new to FiveRuns, sign up for a free 30 day trial:  https://manage.fiveruns.com/signup
+#    After, you have created an account, just execute the downloaded installer.
 #
 cd /tmp
 wget http://manage.fiveruns.com/system/downloads/client/manage-installer-linux-ubuntu-64bit-intel.sh
@@ -84,14 +80,21 @@ wget http://manage.fiveruns.com/system/downloads/client/manage-installer-linux-u
 gem install fiveruns_manage --source http://gems.fiveruns.com
 gem install echoe --no-ri --no-rdoc
 
-#    Install, configure and start the Thin web server
-#
-thin install
-/usr/sbin/update-rc.d -f thin defaults								#	Perhaps this should be Capifed?
-thin -p 80 config -C /etc/thin/eldorado.yml -c /var/www/eldorado  	#	Serve Eldorado on 80
-thin -p 8080 config -C /etc/thin/hello.yml -c /var/www/hello		#	Serve Hello World on 8080
-/etc/init.d/thin start		
+#	Download the custom database.yml for Eldorado
+cd /var/www/eldorado/config
+wget http://github.com/mmond/configuration-automation/tree/master/eldorado_database.yml
+mv eldorado_database.yml database
 '
+#	Deploy Eldorado via Capistrano
+cap deploy:check
+cp eldorado.database.yml el-dorado/config/datatabase.yml   #  This should fix the following error : the database.yml file does not yet exist.    !!!!!!!!!!!!!!!!!!!!!!!!!
+cap deploy:update		
+
+#	Configure Database YAML file??
+
+
+
+#	*******************This should all happen via Cap now *******************
 
 
 #	This section installs a production copy of the Eldorado Community web portal to a preconfigured 
