@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/var/www/eldorado/current/script/process/spawner \
+/var/www/el-dorado/current/script/process/spawner \
   mongrel \
   --environment=production \
   --instances=2 \
