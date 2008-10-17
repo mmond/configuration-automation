@@ -23,7 +23,7 @@
 #	
 
 #	Edit the following line with your slice's IP or domain name
-TARGET='YOURACCOUNT'		# e.g. TARGET='fiveruns' to connect to fiveruns.slicehost.com
+YOURACCOUNT='youraccount'		# e.g. YOURACCOUNT='fiveruns' to connect to fiveruns.slicehost.com
 
 #	Make first remote ssh connection
 ssh root@$TARGET.slicehost.com '
@@ -87,14 +87,14 @@ wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.dep
 #	Update the YOURACCOUNT instances in the above files
 cat config/generic.deploy.rb |sed "s/YOURACCOUNT/$YOURACCOUNT/g" > config/deploy.rb
 
-wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.nginx.conf?raw=true -O eldorado  
-wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
-wget http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
+wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Feldorado.nginx.conf?raw=true -O eldorado  
+wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
+wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
 cap deploy:setup deploy:update 
 
 
 #	Make second remote ssh connection for database configuration.  
-ssh root@$TARGET.slicehost.com '
+ssh root@$YOURACCOUNT.slicehost.com '
 cd /var/www/el-dorado/current		
 #	Configure SQLite
 rake db:create 
