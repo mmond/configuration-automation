@@ -7,7 +7,7 @@
 #	run on after running that version)
 #	
 #	The previous script is available at: http://github.com/mmond.  It installed:
-#   	Ruby 1.8.6 
+#		Ruby 1.8.6 
 #		Rubygems 1.2
 #		Rails 2.1.0
 #		Sqlite3
@@ -87,7 +87,7 @@ wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.dep
 #	Update the YOURACCOUNT instances in the above files
 cat config/generic.deploy.rb |sed "s/YOURACCOUNT/$YOURACCOUNT/g" > config/deploy.rb
 
-wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.deploy.rb?raw=true -O config/generic.deploy.rb  
+wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.nginx.conf?raw=true -O nginx.conf  
 wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
 wget http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
 cap deploy:setup deploy:update 
