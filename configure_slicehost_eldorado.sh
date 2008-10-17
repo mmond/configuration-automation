@@ -87,7 +87,7 @@ wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.dep
 #	Update the YOURACCOUNT instances in the above files
 cat config/generic.deploy.rb |sed "s/YOURACCOUNT/$YOURACCOUNT/g" > config/deploy.rb
 
-wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.nginx.conf?raw=true -O nginx.conf  
+wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.nginx.conf?raw=true -O eldorado  
 wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
 wget http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
 cap deploy:setup deploy:update 

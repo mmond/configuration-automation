@@ -36,7 +36,8 @@ namespace :deploy do
   task :config_servers do
     put(File.read('script/spin'), "#{release_path}/script/spin", :mode => 0444)
     run "chmod 755 #{release_path}/script/spin"
-    put(File.read('./eldorado.nginx.conf'), "/etc/nginx/sites-available/eldorado.nginx.conf", :mode => 0444)
+    put(File.read('./eldorado.nginx.conf'), "/etc/nginx/sites-available/eldorado", :mode => 0444)
+    run "ln -s /etc/nginx/sites-available/eldorado /etc/nginx/sites-enabled/eldorado"
   end
   task :create_symlinks do
     require 'yaml'
