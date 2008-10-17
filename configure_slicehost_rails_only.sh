@@ -19,10 +19,12 @@ apt-get update
 apt-get upgrade -y
 
 #   Install dependencies
-#
 apt-get -y install build-essential libssl-dev libreadline5-dev zlib1g-dev 
 apt-get -y install libsqlite-dev libsqlite3-ruby libsqlite3-dev 
 apt-get -y install mysql-server libmysqlclient15-dev mysql-client 
+
+#	Install misc helpful apps
+apt-get -y install git-core locate telnet
 
 #   Install Ruby 
 #

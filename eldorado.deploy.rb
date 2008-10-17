@@ -3,6 +3,7 @@ load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 set :repository, 'git://github.com/trevorturk/el-dorado.git'
 set :scm, :git
 set :deploy_via, :copy
+set :copy_cache, true
 set :git_shallow_clone, 1
 
 set :application, 'eldorado'
@@ -30,6 +31,9 @@ namespace :deploy do
     put(File.read('config/database.yml'), "#{release_path}/config/database.yml", :mode => 0444)
     # For security consider uploading a production-only database.yml to your server and using this instead:
     # run "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+  task :config_spin do
+    put(File.read('script/spin'), "#{release_path}/script/spin", :mode => 0444)
   end
   task :create_symlinks do
     require 'yaml'

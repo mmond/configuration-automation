@@ -21,17 +21,9 @@
 #	
 
 #	Edit the following line with your slice's IP or domain name
-TARGET='YOURACCOUNT.slicehost.com'		# e.g. fiveruns.slicehost.com
+TARGET='YOURACCOUNT.slicehost.com'		# e.g. TARGET='fiveruns.slicehost.com'	
 
-#	Create local repository for Eldorado.  configure_slicehost_eldorado.sh will download  
-#	Eldorado from Github to ~/el-dorado 
-git clone git://github.com/trevorturk/el-dorado.git
-#	Update the deploy.rb file.  !!!!!!!!!!!!!!!!!!!!!!!!!!!For now we'll use a manually edited YOURACCOUNT.slicehost.com    !!!!!!!!!!!!!!!!!!!!!!!!!
-#	Use the Eldorado application directory structure.  Doing this now allows us to copy the preconfigured database.yml
-cap deploy:setup
-
-#	Make remote ssh connection
-# 	Replace YOURACOUNTNAME with your target server IP or domain name  
+#	Make first remote ssh connection
 ssh root@$YOURACCOUNT.slicehost.com '
 
 #	Add alias for ll	(Dear Ubuntu: This should be default)
@@ -49,8 +41,10 @@ apt-get -y install libsqlite-dev libsqlite3-ruby libsqlite3-dev
 apt-get -y install mysql-server libmysqlclient15-dev mysql-client 
 apt-get -y install git-core locate nginx
 
+#	Create the Eldorado database
+mysql -e "create database eldorado_production"
+
 #    Install Ruby 
-#
 apt-get -y install ruby ruby1.8-dev irb ri rdoc libopenssl-ruby1.8 
 
 #    Install rubygems v.1.2 from source.  apt-get installs
@@ -80,46 +74,32 @@ wget http://manage.fiveruns.com/system/downloads/client/manage-installer-linux-u
 gem install fiveruns_manage --source http://gems.fiveruns.com
 gem install echoe --no-ri --no-rdoc
 
-#	Download the custom database.yml for Eldorado
-cd /var/www/eldorado/config
-wget http://github.com/mmond/configuration-automation/tree/master/eldorado_database.yml
-mv eldorado_database.yml database
 '
-#	Deploy Eldorado via Capistrano
-cap deploy:check
-cp eldorado.database.yml el-dorado/config/datatabase.yml   #  This should fix the following error : the database.yml file does not yet exist.    !!!!!!!!!!!!!!!!!!!!!!!!!
-cap deploy:update		
-
-#	Configure Database YAML file??
-
-
-
-#	*******************This should all happen via Cap now *******************
-
-
-#	This section installs a production copy of the Eldorado Community web portal to a preconfigured 
-#	Slicehost VPS.  It can be modified to support local Ubuntu environments, VM's, etc. 
-#	
-#	Other common Rails related defaults at the time of this writing are Apache, Passenger, nginx and 
-#	Mongrel.  We installed Thin originally as the web front end, so let's leave that serving the 
-#	Hello World app on port 8080.  We'll add Mongrel to the application layer to serve Eldorado and 
-#	install nginx as our web server on default port 80.
+#	Deploy Eldorado via Capistrano configure_slicehost_eldorado.sh will 
+#	download Eldorado from Github to ~/el-dorado 
+git clone git://github.com/trevorturk/el-dorado.git
+cd el-dorado
+#	Use the customized Slicehost Eldorado deploy.rb and database.yml files
+wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.deploy.rb?raw=true -O config/deploy.rb   
+wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
+wget http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
+cap deploy:setup deploy:update 
 
 
-#	We need to download and configure our local copy of the app. The target URL will  
-#	likely change, so check http://github.com/trevorturk for most current updates	
-wget http://github.com/trevorturk/el-dorado/tarball/v0.9.2
-tar zxf trevorturk-el-dorado-a7ead776a85e5eccaa065d5a12319772fdfb7767.tar.gz
-rm trevorturk-el-dorado-a7ead776a85e5eccaa065d5a12319772fdfb7767.tar.gz
-#	This filename is long so we'll simplify it
-mv trevorturk-el-dorado-a7ead776a85e5eccaa065d5a12319772fdfb7767 eldorado
+#	Make second remote ssh connection
+# 	Replace YOURACOUNTNAME with your target server IP or domain name  
+ssh root@$YOURACCOUNT.slicehost.com '
+cd /var/www/el-dorado/current
+#	Run rake tasks
+rake db:create RAILS_ENV=production
+rake db:schema:load RAILS_ENV=production
+rake db:migrate RAILS_ENV=production
+'
 
-#	Use the prepopulated YAML configuration 
-#	You should change secrets for external/production use.
-cd eldorado
-cp ./eldorado.example.yml config/database.yml
+#	Start the servers
+cap deploy:start
 
-#	Use Capistrano to deploy Eldorado to Slicehost
-capify .
+
+
 
 
