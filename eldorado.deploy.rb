@@ -25,8 +25,8 @@ after   'deploy:restart', 'deploy:web:enable'
 
 namespace :deploy do
   task :restart do
-    begin run "/var/lib/gems/1.8/bin/mongrel_rails stop -P #{shared_path}/log/mongrel.#{mongrel_port}.pid"; rescue; end; sleep 15;
-    begin run "/var/lib/gems/1.8/bin/mongrel_rails start -d -e production -p #{mongrel_port} -P log/mongrel.#{mongrel_port}.pid -c #{release_path} --user root --group root"; rescue; end; sleep 15;
+    begin run "/usr/bin/mongrel_rails stop -P #{shared_path}/log/mongrel.#{mongrel_port}.pid"; rescue; end; sleep 15;
+    begin run "/usr/bin/mongrel_rails start -d -e production -p #{mongrel_port} -P log/mongrel.#{mongrel_port}.pid -c #{release_path} --user root --group root"; rescue; end; sleep 15;
   end
   task :config_database do
     put(File.read('config/database.yml'), "#{release_path}/config/database.yml", :mode => 0444)
