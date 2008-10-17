@@ -20,11 +20,14 @@ apt-get upgrade -y
 
 #   Install dependencies
 apt-get -y install build-essential libssl-dev libreadline5-dev zlib1g-dev 
-apt-get -y install libsqlite-dev libsqlite3-ruby libsqlite3-dev 
-apt-get -y install mysql-server libmysqlclient15-dev mysql-client 
 
 #	Install misc helpful apps
-apt-get -y install git-core locate telnet
+apt-get -y install git-core locate telnet 
+
+#	Install servers
+apt-get -y install libsqlite-dev libsqlite3-ruby libsqlite3-dev 
+apt-get -y install mysql-server libmysqlclient15-dev mysql-client 
+apt-get -y install nginx
 
 #   Install Ruby 
 #
@@ -44,7 +47,7 @@ ln -s /usr/bin/gem1.8 /usr/bin/gem
 # 
 gem install -v=2.1.0 rails --no-rdoc --no-ri  
 gem install mysql  --no-rdoc --no-ri
-gem install tzinfo mysql thin --no-rdoc --no-ri
+gem install tzinfo mysql thin mongrel --no-rdoc --no-ri
 
 '
 

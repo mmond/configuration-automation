@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #   This script will remotely configure your Slicehost VPS with the necessary applications and libraries
 #   to serve and monitor production Ruby on Rails applications.  It's intended to run from a bare Ubuntu
 #	8.0.4 installation, for example a new Slicehost VPS build.  This script and its related configuration
@@ -34,23 +36,24 @@ echo "alias \"ll=ls -lAgh\"" >> /root/.profile
 apt-get update
 apt-get upgrade -y
 
-#    Install dependencies
-#
-apt-get -y install build-essential libssl-dev libreadline5-dev zlib1g-dev  
+#   Install dependencies
+apt-get -y install build-essential libssl-dev libreadline5-dev zlib1g-dev 
+
+#	Install misc helpful apps
+apt-get -y install git-core locate telnet elinks
+
+#	Install servers
 apt-get -y install libsqlite-dev libsqlite3-ruby libsqlite3-dev 
 apt-get -y install mysql-server libmysqlclient15-dev mysql-client 
-apt-get -y install git-core locate nginx
-
-#	Create the Eldorado database
-mysql -e "create database eldorado_production"
+apt-get -y install nginx
 
 #    Install Ruby 
 apt-get -y install ruby ruby1.8-dev irb ri rdoc libopenssl-ruby1.8 
 
-#    Install rubygems v.1.2 from source.  apt-get installs
+#    Install rubygems v.1.3 from source.  apt-get installs
 #    version 0.9.4 requiring a lengthy rubygems update
-RUBYGEMS="rubygems-1.2.0"
-wget http://rubyforge.org/frs/download.php/38646/$RUBYGEMS.tgz
+RUBYGEMS="rubygems-1.3.0"
+wget http://rubyforge.org/frs/download.php/43985/$RUBYGEMS.tgz
 tar xzf $RUBYGEMS.tgz
 cd $RUBYGEMS
 ruby setup.rb
@@ -79,8 +82,12 @@ gem install echoe --no-ri --no-rdoc
 #	download Eldorado from Github to ~/el-dorado 
 git clone git://github.com/trevorturk/el-dorado.git
 cd el-dorado
-#	Use the customized Slicehost Eldorado deploy.rb and database.yml files
-wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.deploy.rb?raw=true -O config/deploy.rb   
+#	Use the customized Slicehost Eldorado deploy.rb, spin and database.yml files
+wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.deploy.rb?raw=true -O config/generic.deploy.rb  
+#	Update the YOURACCOUNT instances in the above files
+cat config/generic.deploy.rb |sed "s/YOURACCOUNT/$YOURACCOUNT/g" > config/deploy.rb
+
+wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.deploy.rb?raw=true -O config/generic.deploy.rb  
 wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
 wget http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
 cap deploy:setup deploy:update 
@@ -89,13 +96,13 @@ cap deploy:setup deploy:update
 #	Make second remote ssh connection for database configuration.  
 ssh root@$TARGET.slicehost.com '
 cd /var/www/el-dorado/current		
+#	Configure SQLite
+rake db:create 
+rake db:schema:load 
 #	Configure MySQL
 rake db:create RAILS_ENV=production
 rake db:schema:load RAILS_ENV=production
 rake db:migrate RAILS_ENV=production
-#	Configure SQLite
-rake db:create 
-rake db:schema:load 
 '
 
 #	Start the servers

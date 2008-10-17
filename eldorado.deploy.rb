@@ -18,7 +18,7 @@ role :db,  "YOURACCOUNT.slicehost.com", :primary => true
 
 before  'deploy:update_code', 'deploy:web:disable' 
 after   'deploy:update_code', 'deploy:config_database'
-after   'deploy:update_code', 'deploy:config_spin'
+after   'deploy:update_code', 'deploy:config_servers'
 after   'deploy:update_code', 'deploy:create_symlinks'
 after   'deploy:restart', 'deploy:cleanup'
 after   'deploy:restart', 'deploy:web:enable'
@@ -33,9 +33,10 @@ namespace :deploy do
     # For security consider uploading a production-only database.yml to your server and using this instead:
     # run "cp #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
-  task :config_spin do
+  task :config_servers do
     put(File.read('script/spin'), "#{release_path}/script/spin", :mode => 0444)
     run "chmod 755 #{release_path}/script/spin"
+    put(File.read('./eldorado.nginx.conf'), "/etc/nginx/sites-available/eldorado.nginx.conf", :mode => 0444)
   end
   task :create_symlinks do
     require 'yaml'
