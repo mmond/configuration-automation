@@ -18,6 +18,7 @@ role :db,  "YOURACCOUNT.slicehost.com", :primary => true
 
 before  'deploy:update_code', 'deploy:web:disable' 
 after   'deploy:update_code', 'deploy:config_database'
+after   'deploy:update_code', 'deploy:config_spin'
 after   'deploy:update_code', 'deploy:create_symlinks'
 after   'deploy:restart', 'deploy:cleanup'
 after   'deploy:restart', 'deploy:web:enable'
