@@ -35,6 +35,7 @@ namespace :deploy do
   end
   task :config_spin do
     put(File.read('script/spin'), "#{release_path}/script/spin", :mode => 0444)
+    run "chmod 755 #{release_path}/script/spin"
   end
   task :create_symlinks do
     require 'yaml'
