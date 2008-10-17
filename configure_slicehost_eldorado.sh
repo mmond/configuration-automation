@@ -21,10 +21,10 @@
 #	
 
 #	Edit the following line with your slice's IP or domain name
-TARGET='YOURACCOUNT.slicehost.com'		# e.g. TARGET='fiveruns.slicehost.com'	
+TARGET='YOURACCOUNT'		# e.g. TARGET='fiveruns' to connect to fiveruns.slicehost.com
 
 #	Make first remote ssh connection
-ssh root@$YOURACCOUNT.slicehost.com '
+ssh root@$TARGET.slicehost.com '
 
 #	Add alias for ll	(Dear Ubuntu: This should be default)
 echo "alias \"ll=ls -lAgh\"" >> /root/.profile
@@ -75,7 +75,7 @@ gem install fiveruns_manage --source http://gems.fiveruns.com
 gem install echoe --no-ri --no-rdoc
 
 '
-#	Deploy Eldorado via Capistrano configure_slicehost_eldorado.sh will 
+#	Deploy Eldorado via Capistrano:  configure_slicehost_eldorado.sh will 
 #	download Eldorado from Github to ~/el-dorado 
 git clone git://github.com/trevorturk/el-dorado.git
 cd el-dorado
@@ -86,14 +86,16 @@ wget http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=tru
 cap deploy:setup deploy:update 
 
 
-#	Make second remote ssh connection
-# 	Replace YOURACOUNTNAME with your target server IP or domain name  
-ssh root@$YOURACCOUNT.slicehost.com '
-cd /var/www/el-dorado/current
-#	Run rake tasks
+#	Make second remote ssh connection for database configuration.  
+ssh root@$TARGET.slicehost.com '
+cd /var/www/el-dorado/current		
+#	Configure MySQL
 rake db:create RAILS_ENV=production
 rake db:schema:load RAILS_ENV=production
 rake db:migrate RAILS_ENV=production
+#	Configure SQLite
+rake db:create 
+rake db:schema:load 
 '
 
 #	Start the servers
