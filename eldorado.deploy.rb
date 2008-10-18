@@ -39,6 +39,7 @@ namespace :deploy do
     put(File.read('./eldorado'), "/etc/nginx/sites-available/eldorado", :mode => 0444)
     run "ln -s /etc/nginx/sites-available/eldorado /etc/nginx/sites-enabled/eldorado"
     run "rm /etc/nginx/sites-enabled/default"
+    run "/etc/init.d/nginx start"
   end
   task :create_symlinks do
     require 'yaml'
