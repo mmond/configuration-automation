@@ -26,13 +26,12 @@
 YOURACCOUNT='youraccount'		# e.g. YOURACCOUNT='fiveruns' to connect to fiveruns.slicehost.com
 
 #	Make first remote ssh connection
-ssh root@$TARGET.slicehost.com '
+ssh root@$YOURACCOUNT.slicehost.com '
 
 #	Add alias for ll	(Dear Ubuntu: This should be default)
 echo "alias \"ll=ls -lAgh\"" >> /root/.profile
 
 #    Update Ubuntu package manager
-#
 apt-get update
 apt-get upgrade -y
 
@@ -61,37 +60,24 @@ cd ..
 ln -s /usr/bin/gem1.8 /usr/bin/gem
 
 #    Install gems
-# 
 gem install -v=2.1.0 rails --no-rdoc --no-ri  
 gem install mysql mongrel tzinfo thin --no-rdoc --no-ri
-
-#    Download FiveRuns Manage  ** Installation and registration is run seperately **
-#    If are new to FiveRuns, sign up for a free 30 day trial:  https://manage.fiveruns.com/signup
-#    After, you have created an account, just execute the downloaded installer.
-#
-cd /tmp
-wget http://manage.fiveruns.com/system/downloads/client/manage-installer-linux-ubuntu-64bit-intel.sh
-
-#    Install the Manage gem and echoe gem dependency
-#
-gem install fiveruns_manage --source http://gems.fiveruns.com
-gem install echoe --no-ri --no-rdoc
-
 '
 #	Deploy Eldorado via Capistrano:  configure_slicehost_eldorado.sh will 
 #	download Eldorado from Github to ~/el-dorado 
 git clone git://github.com/trevorturk/el-dorado.git
 cd el-dorado
-#	Use the customized Slicehost Eldorado deploy.rb, spin and database.yml files
+#	Use automation configured deploy.rb, spin and database.yml files
 wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.deploy.rb?raw=true -O config/generic.deploy.rb  
-#	Update the YOURACCOUNT instances in the above files
+#	Update the YOURACCOUNT placeholders in deploy.rb
 cat config/generic.deploy.rb |sed "s/YOURACCOUNT/$YOURACCOUNT/g" > config/deploy.rb
-
+rm config/generic.deploy.rb
+#	Download other configuration files
 wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Feldorado.nginx.conf?raw=true -O eldorado  
 wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
 wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
+#	Use Capistrano to configure directory structure, Eldorado and servers
 cap deploy:setup deploy:update 
-
 
 #	Make second remote ssh connection for database configuration.  
 ssh root@$YOURACCOUNT.slicehost.com '
