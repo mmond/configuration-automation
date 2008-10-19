@@ -21,7 +21,7 @@
 #		Eldorado full stack community web application  
 #	
 
-echo -n "Please enter your the remote server IP or domain name"
+echo "Please enter the remote server IP address or hostname"
 read -e TARGET_SERVER
 
 #	Make first remote ssh connection
@@ -77,9 +77,3 @@ wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation
 wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
 #	Use Capistrano to configure directory structure, Eldorado and servers
 cap deploy:setup deploy:update rake:db_create_sqlite rake:db_schema_load_sqlite rake:db_create rake:db_schema_load rake:db_migrate deploy:start
-'
-
-
-
-
-
