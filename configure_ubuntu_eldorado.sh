@@ -76,22 +76,8 @@ wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation
 wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Feldorado.database.yml.txt?raw=true -O config/database.yml
 wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Fspin?raw=true -O script/spin
 #	Use Capistrano to configure directory structure, Eldorado and servers
-cap deploy:setup deploy:update 
-
-#	Make second remote ssh connection for database configuration.  
-ssh root@$TARGET_SERVER.slicehost.com '
-cd /var/www/el-dorado/current		
-#	Configure SQLite
-rake db:create 
-rake db:schema:load 
-#	Configure MySQL
-rake db:create RAILS_ENV=production
-rake db:schema:load RAILS_ENV=production
-rake db:migrate RAILS_ENV=production
+cap deploy:setup deploy:update rake:db_create_sqlite rake:db_schema_load_sqlite rake:db_create rake:db_schema_load rake:db_migrate deploy:start
 '
-
-#	Start the servers
-cap deploy:start
 
 
 

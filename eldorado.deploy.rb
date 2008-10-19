@@ -51,3 +51,25 @@ namespace :deploy do
     end
   end
 end
+
+namespace :rake do
+  desc "Show the available rake tasks."
+  task :show_tasks do
+    run("cd #{deploy_to}/current; /usr/bin/rake -T")
+  end
+  task :db_create_sqlite do
+    run("cd #{deploy_to}/current; /usr/bin/rake db:create")
+  end
+  task :db_schema_load_sqlite do
+    run("cd #{deploy_to}/current; /usr/bin/rake db:schema:load")
+  end
+  task :db_create do
+    run("cd #{deploy_to}/current; /usr/bin/rake db:create RAILS_ENV=production")
+  end
+  task :db_schema_load do
+    run("cd #{deploy_to}/current; /usr/bin/rake db:schema:load RAILS_ENV=production")
+  end
+  task :db_migrate do
+    run("cd #{deploy_to}/current; /usr/bin/rake db:migrate RAILS_ENV=production")
+  end
+end
