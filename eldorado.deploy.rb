@@ -12,9 +12,9 @@ set :mongrel_port, '8000'
 set :user, 'root'
 set :use_sudo, false  # We are already root in this example
 
-role :app, "YOURACCOUNT.slicehost.com"
-role :web, "YOURACCOUNT.slicehost.com"
-role :db,  "YOURACCOUNT.slicehost.com", :primary => true
+role :app, "TARGET_SERVER"
+role :web, "TARGET_SERVER"
+role :db,  "TARGET_SERVER", :primary => true
 
 before  'deploy:update_code', 'deploy:web:disable' 
 after   'deploy:update_code', 'deploy:config_database'

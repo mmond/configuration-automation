@@ -21,11 +21,11 @@
 #		Eldorado full stack community web application  
 #	
 
-#	Edit the following line with your slice's IP or domain name
-YOURACCOUNT='youraccount'		# e.g. YOURACCOUNT='fiveruns' to connect to fiveruns.slicehost.com
+echo -n "Please enter your the remote server IP or domain name"
+read -e TARGET_SERVER
 
 #	Make first remote ssh connection
-ssh root@$YOURACCOUNT.slicehost.com '
+ssh root@$TARGET_SERVER '
 
 #	Add alias for ll	(Dear Ubuntu: This should be default)
 echo "alias \"ll=ls -lAgh\"" >> /root/.profile
@@ -68,8 +68,8 @@ git clone git://github.com/trevorturk/el-dorado.git
 cd el-dorado
 #	Use automation configured deploy.rb, spin and database.yml files
 wget http://github.com/mmond/configuration-automation/tree/master%2Feldorado.deploy.rb?raw=true -O config/generic.deploy.rb  
-#	Update the YOURACCOUNT placeholders in deploy.rb
-cat config/generic.deploy.rb |sed "s/YOURACCOUNT/$YOURACCOUNT/g" > config/deploy.rb
+#	Update the TARGET_SERVER placeholders in deploy.rb
+cat config/generic.deploy.rb |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > config/deploy.rb
 rm config/generic.deploy.rb
 #	Download other configuration files
 wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation/tree/master%2Feldorado.nginx.conf?raw=true -O eldorado  
@@ -79,7 +79,7 @@ wget --timeout=10 --waitretry=1 http://github.com/mmond/configuration-automation
 cap deploy:setup deploy:update 
 
 #	Make second remote ssh connection for database configuration.  
-ssh root@$YOURACCOUNT.slicehost.com '
+ssh root@$TARGET_SERVER.slicehost.com '
 cd /var/www/el-dorado/current		
 #	Configure SQLite
 rake db:create 
