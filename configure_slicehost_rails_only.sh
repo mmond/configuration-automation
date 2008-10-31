@@ -1,6 +1,5 @@
 #    This script will remotely configure your Slicehost VPS with the necessary applications and libraries
-#    to serve and monitor a production Ruby on Rails application.  A simple "Hello World" Rails
-#    Application is installed and started to confirm the process.
+#    to serve a production Ruby on Rails application.  
 #  
 #    Versions installed are Ruby 1.8.6, Rubygems 1.2, Rails 2.1.0. Sqlite3, MySQL 5.0.51a, Thin 0.8.2
 
