@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #   This script will connect to your Ubuntu 8.0.4 server, install all the necessary applications and 
-#   libraries to serve production Ruby on Rails applications and deploy the Eldorado full stack community.  
+#   libraries to serve production Ruby on Rails applications and deploy the Eldorado community web app.  
 #	The script and its related configuration files are an extension are a superset of the original, 
 #	basic configuration script for a new Slicehost Ubuntu server. 
 #	
