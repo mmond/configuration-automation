@@ -2,7 +2,7 @@
 #	Application
 #############################################################
 
-set :application, "eldorado"
+set :application, "example"
 set :deploy_to, "/var/www/#{application}"
 
 #############################################################
@@ -10,27 +10,26 @@ set :deploy_to, "/var/www/#{application}"
 #############################################################
 
 default_run_options[:pty] = true
-set :use_sudo, false
+set :use_sudo, true
 
 #############################################################
 #	Servers
 #############################################################
 
-set :user, "root"
-set :domain, "TARGET_SERVER"
+set :user, "jim"
+set :domain, "example.com"
 server domain, :app, :web
 role :db, domain, :primary => true
 
 #############################################################
-#	git
+#	Subversion
 #############################################################
 
-set :repository, 'git://github.com/trevorturk/el-dorado.git'
-set :scm, :git
-set :deploy_via, :copy
-set :copy_cache, true
-set :git_shallow_clone, 1
-  
+set :repository,  "http://www.example.com/svn/example"
+set :svn_username, "jim"
+set :svn_password, "password"
+set :checkout, "export"
+
 #############################################################
 #	Passenger
 #############################################################
@@ -43,24 +42,3 @@ namespace :passenger do
 end
 
 after :deploy, "passenger:restart"
-
-#############################################################
-#	Database Rake Tasks
-#############################################################
-
-namespace :rake do
-  desc "Show the available rake tasks."
-  task :show_tasks do
-    run("cd #{deploy_to}/current; /usr/bin/rake -T")
-  end
-  task :db_create do
-    run("cd #{deploy_to}/current; /usr/bin/rake db:create RAILS_ENV=production")
-  end
-  task :db_schema_load do
-    run("cd #{deploy_to}/current; /usr/bin/rake db:schema:load RAILS_ENV=production")
-  end
-  task :db_migrate do
-    run("cd #{deploy_to}/current; /usr/bin/rake db:migrate RAILS_ENV=production")
-  end
-end
-  

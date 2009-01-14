@@ -15,9 +15,9 @@
 #		Rubygems 1.3
 #		
 #	Services:
-#		Capistrano			Phusion Passenger
-#		MySQL				Sqlite3		
-#		Puppet	
+#		MySQL				Phusion Passenger
+#								
+#			
 #	
 #	Rails Applications:	 
 #		Hello World 		Eldorado
@@ -99,7 +99,9 @@ echo "<html><h1>Hello World</h1></html>" > app/views/welcome/hello.html.erb
 updatedb
 '
 #	Install any Rails applications?
-echo "The Hello World test app is available at " $TARGET_SERVER"/welcome/hello.index.erb"
+echo "
+
+The Hello World test app is available at http://hello." $TARGET_SERVER
 echo "Would you like to install a production Rails application?"
 echo "The choices are: "
 echo "Radiant CMS"
