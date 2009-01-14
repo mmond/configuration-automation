@@ -85,6 +85,9 @@ echo "
 
 ln -s /etc/apache2/sites-available/hello /etc/apache2/sites-enabled/hello
 
+#	Set permissions to support Passenger
+chown -R www-data.www-data /var/www
+
 #	Configure a simple Rails Application
 cd /var/www
 rails hello

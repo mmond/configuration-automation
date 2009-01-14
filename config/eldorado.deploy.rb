@@ -45,6 +45,26 @@ end
 after :deploy, "passenger:restart"
 
 #############################################################
+#	Additional Passenger Deploy Tasks
+#############################################################
+
+namespace :deploy do
+  desc "Upload custom configuration files"
+  task :upload do
+    put(File.read('config/deploy.rb'), "#{release_path}/config/deploy.rb", :mode => 0444)  
+    put(File.read('config/database.yml'), "#{release_path}/config/database.yml", :mode => 0444)  
+    put(File.read('config/eldorado.vhost'), "/etc/apache2/sites-available/eldorado", :mode => 0444)  
+  end
+  
+  desc "Create Passenger vhost sym link"
+  task :symlink do
+    run "ln -s /etc/apache2/sites-available/eldorado /etc/apache2/sites-enabled/"
+  end
+end
+
+
+
+#############################################################
 #	Database Rake Tasks
 #############################################################
 
