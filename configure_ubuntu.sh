@@ -103,25 +103,9 @@ chown -R www-data.www-data /var/www
 #	Misc
 updatedb
 '
-#	Install any Rails applications?
 echo "
 
-The Hello World test app is available at http://hello." $TARGET_SERVER
-echo "Would you like to install a production Rails application?"
-echo "The choices are: "
-echo "Radiant CMS"
-echo "Spree E-Commerce"
-echo "Typo Blog"
-echo "El Dorado Community Web App"
-echo "[Enter] to install one of the above or [CTRL-C] or anything else to quit"
-read INSTALL_RAILS
+Enjoy your Rails server! The Hello World test app is available at http://hello." $TARGET_SERVER
 
-case $INSTALL_RAILS in
-"")
-	source configure_rails_apps.sh
-	;;
-*)
-	echo $INSTALL_RAILS: Ok, enjoy your server >&2
-	exit 1
-	;;
-esac
+#	Install any Rails applications?
+source configure_rails_apps.sh
