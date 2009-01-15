@@ -23,8 +23,10 @@
 #		Hello World 		Eldorado
 
 #	Get the target server 
-echo "Please enter the remote server IP address or hostname:"
-read -e TARGET_SERVER
+if [ -z "${TARGET_SERVER}" ]; then 
+	echo "Please enter the remote server IP address or hostname:"
+	read -e TARGET_SERVER
+fi
 
 #	Make first remote ssh connection
 ssh root@$TARGET_SERVER '
