@@ -39,6 +39,7 @@ namespace :passenger do
   desc "Restart Application"
   task :restart do
     run "touch #{current_path}/tmp/restart.txt"
+    run "/etc/init.d/apache2 reload"
   end
 end
 
