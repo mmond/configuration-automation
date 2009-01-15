@@ -45,7 +45,7 @@ end
 after :deploy, "passenger:restart"
 
 #############################################################
-#	Additional Passenger Deploy Tasks 
+#	El Dorado Deploy Tasks 
 #############################################################
 
 namespace :deploy do
@@ -55,10 +55,17 @@ namespace :deploy do
     put(File.read('config/database.yml'), "/var/www/eldorado/current/config/database.yml", :mode => 0444)  
     put(File.read('config/eldorado.vhost'), "/etc/apache2/sites-available/eldorado", :mode => 0444)  
   end
-  
   desc "Create Passenger vhost symlink"
   task :symlink_vhost do
     run "ln -s /etc/apache2/sites-available/eldorado /etc/apache2/sites-enabled/"
+  end
+  desc "Change owner to web user"
+  task :chown_web do
+    run "chown -R www-data.www-data /var/www"
+  end
+  desc "Remove El Dorado .htaccess file"
+  task :remove_htaccess do
+    run "rm /var/www/eldorado/current/public/.htaccess"
   end
 end
 
@@ -83,4 +90,3 @@ namespace :rake do
     run("cd #{deploy_to}/current; /usr/bin/rake db:migrate RAILS_ENV=production")
   end
 end
-  

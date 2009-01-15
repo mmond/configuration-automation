@@ -85,15 +85,15 @@ echo "
 
 ln -s /etc/apache2/sites-available/hello /etc/apache2/sites-enabled/hello
 
-#	Set permissions to support Passenger
-chown -R www-data.www-data /var/www
-
 #	Configure a simple Rails Application
 cd /var/www
 rails hello
 cd hello
 ./script/generate controller welcome hello
 echo "<html><h1>Hello World</h1></html>" > app/views/welcome/hello.html.erb
+
+#	Set permissions to support Passenger
+chown -R www-data.www-data /var/www
 
 #	Load updated Apache configuration
 /etc/init.d/apache2 reload

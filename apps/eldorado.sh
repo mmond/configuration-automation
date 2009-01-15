@@ -10,19 +10,18 @@ fi
 cd ..
 git clone git://github.com/trevorturk/el-dorado.git
 mv el-dorado eldorado
-cd eldorado/config
+cd eldorado/
 
 #	Use configuration-automation's eldorado deploy.rb
-#	Update the TARGET_SERVER placeholders in deploy.rb
-cat ../configuration-automation/config/eldorado.deploy.rb |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > deploy.rb
+#	Update the TARGET_SERVER placeholder in deploy.rb
+cat ../configuration-automation/config/eldorado.deploy.rb |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > config/deploy.rb
 
 #	Use configuration-automation's eldorado vhost
-#	Update the TARGET_SERVER placeholders in the Apache vhost
-cat ../configuration-automation/config/eldorado.vhost |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > eldorado
+#	Update the TARGET_SERVER placeholder in the Apache vhost
+cat ../configuration-automation/config/eldorado.vhost |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > config/eldorado.vhost
 
 #	Use configuration-automation's eldorado database.yml
-cp ../configuration-automation/config/eldordado.database.yml .
+cp ../configuration-automation/config/eldorado.database.yml config/
 
 #	Use Capistrano to configure directory structure, Eldorado and servers
-cd ..
-cap deploy:setup deploy:update deploy:symlink_vhost deploy:upload_conf_files rake:db_create rake:db_schema_load rake:db_migrate deploy:start
+cap deploy:setup deploy:update deploy:symlink_vhost deploy:upload_conf_files rake:db_create rake:db_schema_load rake:db_migrate deploy:restart
