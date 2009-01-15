@@ -7,7 +7,8 @@ fi
 
 
 #	download Eldorado from Github to ~/el-dorado 
-echo "Dowloading Eldorado..."
+echo "Dowloading Eldorado...  In a moment Capistrano will request your password.
+"
 cd ..
 git clone git://github.com/trevorturk/el-dorado.git
 mv el-dorado eldorado
