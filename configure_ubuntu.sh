@@ -79,8 +79,7 @@ ServerName	$HOSTNAME
 " >> /etc/apache2/apache2.conf
 
 #	Create a vhost for the test application
-echo "
-<VirtualHost *>
+echo "<VirtualHost *:80>
    ServerName hello.onlinerailsapps.com
    DocumentRoot /var/www/hello/app/views/welcome
    DirectoryIndex hello.html.erb
@@ -107,7 +106,7 @@ updatedb
 '
 echo "
 
-Enjoy your Rails server! The Hello World test app is available at http://hello." $TARGET_SERVER
+Enjoy your Rails server! The Hello World test app is available at http://hello."$TARGET_SERVER
 
 #	Install any Rails applications?
 source configure_rails_apps.sh

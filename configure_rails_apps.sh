@@ -1,28 +1,20 @@
 #	This is stage 2 of configuration-automation: Installing Rails Apps
-#	It can be run independently of configure_ubuntu.sh from the same dir.
+#	It is called by configure_ubuntu.sh but can also be run directly 
+#	from the same ./configuration-automation directory.
 
 echo "
-To install a production Rails application, choose from the list or [CTRL-C] to quit"
-echo "The choices are: "
-printf "Which Rails application would you like to install?\n"
-printf "1. El Dorado\n"
-printf "2. Spree\n"
-printf "3. Typo\n"
-printf "4. Radiant\n"
+To install a production Rails application, choose from the list or [CTRL-C] to quit
+The choices are: "
+echo "1. Radiant CMS"
+echo "2. El Dorado Community Web App"
 printf "Default (1): " ; read RAILS_APPLICATION
 
 case $RAILS_APPLICATION in
 1)
-	source apps/eldorado.sh
+	source apps/radiant.sh
 	;;
 2)
-	source apps/spree.sh
-	;;
-3)
-	source apps/typo.sh
-	;;
-4)
-	source apps/radiant.sh
+	source apps/eldorado.sh
 	;;
 *)
 	echo $RAILS_APPLICATION: unknown option >&2
