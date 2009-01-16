@@ -74,6 +74,8 @@ echo "
 LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-2.0.6/ext/apache2/mod_passenger.so
 PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-2.0.6
 PassengerRuby /usr/bin/ruby1.8
+
+ServerName	$HOSTNAME
 " >> /etc/apache2/apache2.conf
 
 #	Create a vhost for the test application
