@@ -78,7 +78,7 @@ PassengerRuby /usr/bin/ruby1.8
 
 #	Create a vhost for the test application
 echo "
-<VirtualHost *:80>
+<VirtualHost *>
    ServerName hello.onlinerailsapps.com
    DocumentRoot /var/www/hello/app/views/welcome
    DirectoryIndex hello.html.erb

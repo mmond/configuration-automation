@@ -1,4 +1,4 @@
-<VirtualHost *:80>
+<VirtualHost *>
    ServerName eldorado.TARGET_SERVER
    DocumentRoot /var/www/eldorado/current/public/
 </VirtualHost>
