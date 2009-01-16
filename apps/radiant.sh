@@ -1,0 +1,35 @@
+#	Deploy Radiant via Capistrano
+#	Radiant already has a great demo at demo.radiant.org.  Also the new recommended
+#	install method is crazy simple via their gem.  Still pushing one button is 
+#	faster and more reliable than installing or reinstalling, updating Passenger, etc.
+#	Also, we'll install from source, allow you to modify the app locally and deploy
+#	via Capistrano.
+
+
+#	If TARGET_SERVER is not set by parent script, ask for it
+if [ -z "${TARGET_SERVER}" ]; then 
+	echo "Please enter the remote server IP address or hostname:"
+	read -e TARGET_SERVER
+fi
+
+
+#	download Radiant from Github to ~/radiant 
+echo "In a moment Capistrano will request your password.
+"
+cd ..
+git clone git://github.com/radiant/radiant.git
+cd radiant/
+
+#	Use configuration-automation's Radiant deploy.rb
+#	Update the TARGET_SERVER placeholder in deploy.rb
+cat ../configuration-automation/config/radiant.deploy.rb |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > config/deploy.rb
+
+#	Use configuration-automation's Radiant vhost
+#	Update the TARGET_SERVER placeholder in the Apache vhost
+cat ../configuration-automation/config/radiant.vhost |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > config/radiant.vhost
+
+#	Use configuration-automation's Radiant database.yml
+cp ../configuration-automation/config/radiant.database.yml config/database.yml
+
+#	Use Capistrano to configure directory structure, Radiant and servers
+cap deploy:setup deploy:update deploy:symlink_vhost deploy:upload_conf_files rake:db_bootstrap passenger:restart

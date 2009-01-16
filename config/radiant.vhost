@@ -1,0 +1,4 @@
+<VirtualHost *:80>
+   ServerName radiant.TARGET_SERVER
+   DocumentRoot /var/www/radiant/current/public/
+</VirtualHost>
