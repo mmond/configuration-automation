@@ -10,7 +10,7 @@ echo "2. El Dorado Community Web App"
 printf "Default (1): " ; read RAILS_APPLICATION
 
 case $RAILS_APPLICATION in
-1)
+"", 1)
 	source apps/radiant.sh
 	;;
 2)
