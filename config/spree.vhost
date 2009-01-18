@@ -1,0 +1,4 @@
+<VirtualHost *:80>
+   ServerName spree.TARGET_SERVER
+   DocumentRoot /var/www/spree/current/public/
+</VirtualHost>

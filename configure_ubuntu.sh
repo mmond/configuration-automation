@@ -9,23 +9,23 @@ Welcome to configuration-automation!
 This script will connect to your remote Ubuntu 8.x server, install the necessary applications and libraries 
 to serve production Ruby on Rails applications.  It will then deploy a Rails application you choose from a list.  
 
-				###### WARNING #########
-				########################
-This script is intended for newly installed Ubuntu 8.x Linux servers.  Running it against servers with existing
-data, system libraries, databases or Rails applications may 'destroy such life in favor of its new matrix.'
+##################################################################################################################
+#####################################           Caution           ################################################
+##################################################################################################################
+This script is intended for newly installed Ubuntu 8.x Linux servers.  It runs with root priveleges.  Running it 
+against servers with existing data, system libraries, databases or Rails applications may 'destroy such life in 
+favor of its new matrix.'
 
-Similarly, the Rails app installer scripts may be run individually against an server already configured by
-configuration-automation.  They will conflict with other apps already installed, but they would interfere with
-an existing application installaion of the same name.  i.e. don't install Radiant, if you already have an install
+Similarly, the Rails app installer scripts may be run individually against a server already configured by
+configuration-automation.  They will not conflict with other apps already installed, but they would with an 
+existing application installaion of the same name.  i.e. don't install Radiant, if you already have an install
 of Radiant on the server that you care about.
-				###### WARNING #########
-				###### WARNING #########
+##################################################################################################################
+##################################################################################################################
 
-The script and its related configuration files are an extension are a superset of the original, 
-basic configuration script available at: http://github.com/mmond/configuration-automation. This version, 
-introduces menu driven configuration choices like the target server and Rails application to deploy. 
-Possible configuration options to add in the future: different operating system target, 
-different versions of Ruby/Rails/other,install locations, multiple server targets and Puppet.
+The script and its related configuration files are an extension of the original, script available at: http://github.com/mmond/configuration-automation. This version introduces menu driven configuration choices like 
+the target server and Rails application to deploy.  Possible configuration options to add in the future: more 
+OS targets, different versions of Ruby/Rails/libraries, install locations, multiple server targets and Puppet/Chef.
   	
 The following software packages are installed:
 		Ruby 1.8.7			Rails 2.2.2	
