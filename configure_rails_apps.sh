@@ -2,14 +2,17 @@
 #	It is called by configure_ubuntu.sh but can also be run directly 
 #	from the same ./configuration-automation directory.
 
-echo "
-To install a production Rails application, choose from the list or [CTRL-C] to quit
-The choices are: "
-echo "0. None"
-echo "1. Radiant CMS"
-echo "2. El Dorado"
-echo "3. Spree"
-printf "Default (0): " ; read RAILS_APPLICATION
+if [ -z "${RAILS_APPLICATION}" ]; then 
+	echo "
+	To install a production Rails application, choose from the list or [CTRL-C] to quit
+	The choices are: "
+	echo "0. None"
+	echo "1. Radiant CMS"
+	echo "2. El Dorado"
+	echo "3. Spree"
+	printf "Default (0): " ; read RAILS_APPLICATION
+fi
+
 
 case $RAILS_APPLICATION in
 0)

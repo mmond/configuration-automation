@@ -1,26 +1,48 @@
 #!/bin/bash
 
-#   This script will connect to your server, currently supporting Ubuntu 8.x with other targets planned, 
-#	install the necessary applications and libraries to serve production Ruby on Rails applications.  It 
-#	will then deploy an application you choose from those available.  
-#
-#	The script and its related configuration files are an extension are a superset of the original, 
-#	basic configuration script available at: http://github.com/mmond/configuration-automation. This version, 
-#	introduces menu driven configuration choices like the target server and Rails application to deploy. 
-#	Possible configuration options to add in the future: different operating system target, 
-#	different versions of Ruby/Rails/other,install locations, multiple server targets and Puppet.
-#  	
-#	This script includes the following versions, at the time of this writing:
-#		Ruby 1.8.7 			Rails 2.2.2	
-#		Rubygems 1.3
-#		
-#	Services:
-#		MySQL				Phusion Passenger
-#								
-#			
-#	
-#	Rails Applications:	 
-#		Hello World 		Eldorado
+echo "
+
+
+
+Welcome to configuration-automation!
+
+This script will connect to your remote Ubuntu 8.x server, install the necessary applications and libraries 
+to serve production Ruby on Rails applications.  It will then deploy a Rails application you choose from a list.  
+
+				###### WARNING #########
+				########################
+This script is intended for newly installed Ubuntu 8.x Linux servers.  Running it against servers with existing
+data, system libraries, databases or Rails applications may 'destroy such life in favor of its new matrix.'
+
+Similarly, the Rails app installer scripts may be run individually against an server already configured by
+configuration-automation.  They will conflict with other apps already installed, but they would interfere with
+an existing application installaion of the same name.  i.e. don't install Radiant, if you already have an install
+of Radiant on the server that you care about.
+				###### WARNING #########
+				###### WARNING #########
+
+The script and its related configuration files are an extension are a superset of the original, 
+basic configuration script available at: http://github.com/mmond/configuration-automation. This version, 
+introduces menu driven configuration choices like the target server and Rails application to deploy. 
+Possible configuration options to add in the future: different operating system target, 
+different versions of Ruby/Rails/other,install locations, multiple server targets and Puppet.
+  	
+The following software packages are installed:
+		Ruby 1.8.7			Rails 2.2.2	
+		Rubygems 1.3		Phusion Passenger
+		MySQL 5.0.67		
+		
+After the server is configured with Ruby, Rails and Phusion Passenger, a 'Hello World' Rails application 
+is installed as an example.  If you'd like to install an actual production Rails app, please choose from 
+the options below.  This section (configure_rails_apps.sh) can be run separately to install more apps.
+
+The choices are: "
+echo "0. None"
+echo "1. Radiant CMS"
+echo "2. El Dorado"
+echo "3. Spree"
+printf "Default (0): " ; read RAILS_APPLICATION
+
 
 #	Get the target server 
 if [ -z "${TARGET_SERVER}" ]; then 
@@ -60,7 +82,7 @@ cd ..
 ln -s /usr/bin/gem1.8 /usr/bin/gem
 
 #    Install gems
-gem install rails --no-rdoc --no-ri  
+gem install rails rspec --no-rdoc --no-ri  
 gem install mysql tzinfo passenger sqlite3-ruby --no-rdoc --no-ri
 
 #	Install and configure Apache for Passenger/Rails
