@@ -54,7 +54,11 @@ namespace :deploy do
   task :upload_conf_files do
     put(File.read('config/deploy.rb'), "/var/www/radiant/current/config/deploy.rb", :mode => 0444)  
     put(File.read('config/database.yml'), "/var/www/radiant/current/config/database.yml", :mode => 0444)  
-    put(File.read('config/eldorado.vhost'), "/etc/apache2/sites-available/radiant", :mode => 0444)  
+    put(File.read('config/radiant.vhost'), "/etc/apache2/sites-available/radiant", :mode => 0444)  
+  end
+  desc "Install gem dependencies"
+  task :install_gems do
+    run "gem install rspec rspec-rails --no-rdoc --no-ri"
   end
   desc "Create Passenger vhost symlink"
   task :symlink_vhost do
@@ -63,6 +67,10 @@ namespace :deploy do
   desc "Change owner to web user"
   task :chown_web do
     run "chown -R www-data.www-data /var/www/radiant"
+  end
+  desc "Create MySQL database"
+  task :create_db do
+    run "mysql -e \"create database radiant_production\""
   end
 end
 
@@ -77,7 +85,8 @@ namespace :rake do
   task :show_tasks do
     run("cd #{deploy_to}/current; /usr/bin/rake -T")
   end
+  desc "Run the rake database bootstrap tasks"
   task :db_bootstrap do
-    run("cd #{deploy_to}/current; /usr/bin/rake production db:bootstrap")
+    run("cd #{deploy_to}/current; /usr/bin/rake production db:bootstrap OVERWRITE=\"true\" ADMIN_NAME=\"Administrator\" ADMIN_USERNAME=\"admin\" ADMIN_PASSWORD=\"radiant\" DATABASE_TEMPLATE=\"styled-blog.yml\"")
   end
 end

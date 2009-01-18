@@ -30,7 +30,7 @@ set :scm, :git
 set :deploy_via, :copy
 set :copy_cache, true
 set :git_shallow_clone, 1
-  
+
 #############################################################
 #	Passenger
 #############################################################

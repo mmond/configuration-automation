@@ -19,6 +19,7 @@ echo "In a moment Capistrano will request your password.
 cd ..
 git clone git://github.com/radiant/radiant.git
 cd radiant/
+capify .
 
 #	Use configuration-automation's Radiant deploy.rb
 #	Update the TARGET_SERVER placeholder in deploy.rb
@@ -32,4 +33,4 @@ cat ../configuration-automation/config/radiant.vhost |sed "s/TARGET_SERVER/$TARG
 cp ../configuration-automation/config/radiant.database.yml config/database.yml
 
 #	Use Capistrano to configure directory structure, Radiant and servers
-cap deploy:setup deploy:update deploy:symlink_vhost deploy:upload_conf_files rake:db_bootstrap passenger:restart
+cap deploy:setup deploy:update deploy:upload_conf_files deploy:symlink_vhost deploy:create_db rake:db_bootstrap passenger:restart
