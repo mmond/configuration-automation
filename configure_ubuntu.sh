@@ -9,9 +9,7 @@ Welcome to configuration-automation!
 This script will connect to your remote Ubuntu 8.x server, install the necessary applications and libraries 
 to serve production Ruby on Rails applications.  It will then deploy a Rails application you choose from a list.  
 
-##################################################################################################################
 #####################################           Caution           ################################################
-##################################################################################################################
 This script is intended for newly installed Ubuntu 8.x Linux servers.  It runs with root priveleges.  Running it 
 against servers with existing data, system libraries, databases or Rails applications may 'destroy such life in 
 favor of its new matrix.'
@@ -20,8 +18,6 @@ Similarly, the Rails app installer scripts may be run individually against a ser
 configuration-automation.  They will not conflict with other apps already installed, but they would with an 
 existing application installaion of the same name.  i.e. don't install Radiant, if you already have an install
 of Radiant on the server that you care about.
-##################################################################################################################
-##################################################################################################################
 
 The script and its related configuration files are an extension of the original, script available at: http://github.com/mmond/configuration-automation. This version introduces menu driven configuration choices like 
 the target server and Rails application to deploy.  Possible configuration options to add in the future: more 
@@ -41,6 +37,7 @@ echo "0. None"
 echo "1. Radiant CMS"
 echo "2. El Dorado"
 echo "3. Spree"
+echo "4. jobberRails"
 printf "Default (0): " ; read RAILS_APPLICATION
 
 

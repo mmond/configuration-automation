@@ -1,0 +1,4 @@
+<VirtualHost *:80>
+   ServerName jobberrails.TARGET_SERVER
+   DocumentRoot /var/www/jobberrails/current/public/
+</VirtualHost>

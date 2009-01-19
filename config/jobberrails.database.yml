@@ -1,6 +1,6 @@
 production:
   adapter: mysql
-  database: radiant_production 
+  database: jobberrails_production 
   username: root 
   password:  
   host: localhost
