@@ -80,7 +80,7 @@ ln -s /usr/bin/gem1.8 /usr/bin/gem
 
 #    Install gems
 gem install rails -v=2.2.2 --no-rdoc --no-ri  
-gem install rspec --no-rdoc --no-ri  
+gem install rspec rdoc --no-rdoc --no-ri  
 gem install mysql tzinfo passenger sqlite3-ruby --no-rdoc --no-ri
 
 #	Install and configure Apache for Passenger/Rails
