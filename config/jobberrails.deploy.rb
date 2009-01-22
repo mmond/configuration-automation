@@ -66,11 +66,11 @@ namespace :deploy do
   end
   desc "Install Rails version 2.1.0"
   task :rails_install do
-    run("cd #{deploy_to}/current; /usr/bin/gem install rails -v 2.1.0")
+    run("cd #{deploy_to}/current; /usr/bin/gem install rails -v 2.1.0 --no-rdoc --no-ri")
   end
   desc "Install haml gem"
   task :haml_install do
-    run("cd #{deploy_to}/current; /usr/bin/gem install haml")
+    run("cd #{deploy_to}/current; /usr/bin/gem install haml --no-rdoc --no-ri")
   end
 end
 
@@ -86,7 +86,7 @@ namespace :rake do
     run("cd #{deploy_to}/current; /usr/bin/rake -T")
   end
   task :gems_install do
-    run("cd #{deploy_to}/current; /usr/bin/rake gems:install")
+    run("cd #{deploy_to}/current; /usr/bin/rake gems:install --no-rdoc --no-ri")
   end
   task :db_create do
     run("cd #{deploy_to}/current; /usr/bin/rake db:create RAILS_ENV=production")

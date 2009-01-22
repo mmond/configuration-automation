@@ -67,7 +67,7 @@ apt-get -y install git-core locate telnet elinks
 apt-get -y install mysql-server libmysqlclient15-dev mysql-client
 
 #    Install Ruby 
-apt-get -y install ruby ruby1.8-dev libopenssl-ruby1.8 
+apt-get -y install ruby ruby1.8-dev libopenssl-ruby1.8 ri
 
 #    Install rubygems v.1.3 from source.  
 RUBYGEMS="rubygems-1.3.1"
