@@ -10,6 +10,7 @@ if [ -z "${RAILS_APPLICATION}" ]; then
 	echo "1. Radiant CMS"
 	echo "2. El Dorado"
 	echo "3. Spree"
+	echo "4. jobberRails"
 	printf "Default (0): " ; read RAILS_APPLICATION
 fi
 
@@ -27,6 +28,9 @@ case $RAILS_APPLICATION in
 	;;
 3)
 	source apps/spree.sh
+	;;
+4)
+	source apps/jobberrails.sh
 	;;
 *)
 	echo $RAILS_APPLICATION: That is an unknown option. Exiting... >&2

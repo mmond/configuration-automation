@@ -27,4 +27,4 @@ cat ../configuration-automation/config/jobberrails.vhost |sed "s/TARGET_SERVER/$
 cp ../configuration-automation/config/jobberrails.database.yml config/database.yml
 
 #	Use Capistrano to configure directory structure, jobberRails and servers
-cap deploy:setup deploy:update deploy:upload_conf_files deploy:symlink_vhost rake:gems_install deploy:chown_web rake:db_create rake:db_schema_load rake:db_migrate passenger:restart
+cap deploy:setup deploy:update deploy:upload_conf_files deploy:symlink_vhost deploy:rails_install rake:gems_install deploy:chown_web rake:db_create rake:db_schema_load rake:db_migrate passenger:restart

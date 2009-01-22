@@ -64,6 +64,10 @@ namespace :deploy do
   task :chown_web do
     run "chown -R www-data.www-data /var/www"
   end
+  desc "Install Rails version 2.1.0"
+  task :rails_install do
+    run("cd #{deploy_to}/current; /usr/bin/gem install rails -v 2.1.0")
+  end
 end
 
 
