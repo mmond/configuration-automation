@@ -86,7 +86,7 @@ namespace :rake do
     run("cd #{deploy_to}/current; /usr/bin/rake -T")
   end
   task :gems_install do
-    run("cd #{deploy_to}/current; /usr/bin/rake gems:install RAILS_ENV=production --no-rdoc --no-ri")
+    run("cd #{deploy_to}/current; /usr/bin/rake gems:install RAILS_ENV=production")
   end
   task :db_create do
     run("cd #{deploy_to}/current; /usr/bin/rake db:create RAILS_ENV=production")
