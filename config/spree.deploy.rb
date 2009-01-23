@@ -82,7 +82,7 @@ namespace :rake do
     run("cd #{deploy_to}/current; /usr/bin/rake -T")
   end
   task :gems_install do
-    run("cd #{deploy_to}/current; /usr/bin/rake gems:install")
+    run("cd #{deploy_to}/current; /usr/bin/rake gems:install RAILS_ENV=production")
   end
   desc "Bootstrap the database (run the migrations, create admin account, load sample data.)"
   task :db_bootstrap do
