@@ -27,3 +27,6 @@ cp ../configuration-automation/config/eldorado.database.yml config/database.yml
 
 #	Use Capistrano to configure directory structure, Eldorado and servers
 cap deploy:setup deploy:update deploy:symlink_vhost deploy:upload_conf_files deploy:chown_web deploy:remove_htaccess rake:db_create rake:db_schema_load rake:db_migrate passenger:restart
+
+#	Go back to configuration-automation root dir (to allow all app installs)
+cd ../configuration-automation
