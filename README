@@ -1,12 +1,5 @@
-This script will connect to your server, currently supporting Ubuntu 8.0.4 with other targets planned, 
-install the necessary applications and libraries to serve production Ruby on Rails applications and 
-deploy the Eldorado community web application.  
-
-The script and its related configuration files are an extension are a superset of the original, 
-basic configuration script available at: http://github.com/mmond/configuration-automation. This version, 
-v. 0.5, introduces menu driven configuration choices like the Rails application to deploy, web server and 
-application layer. Possible configuration options to add in the future: different operating system target, 
-Ruby/Rails/other libraries version numbers, gems, install locations, multiple targets, Puppet, others.
+This script will connect to your server, currently supporting Ubuntu 8.0.4 8.1.0, 
+install the necessary applications and libraries to serve production Ruby on Rails applications.
 
 The original script is from the FiveRuns blog post at: http://blog.fiveruns.com/2008/9/24/rails-automation-at-slicehost  
 is a basic shell script to prepare a remote Slicehost Ubuntu 8.04 VPS for running production Ruby on Rails applications.
