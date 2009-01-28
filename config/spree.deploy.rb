@@ -68,6 +68,7 @@ namespace :deploy do
     task :gems_install do
       run "gem install --no-rdoc --no-ri has_many_polymorphs -v=2.12"
       run "gem install --no-rdoc --no-ri highline -v=1.4.0"
+      run "gem install --no-rdoc --no-ri activerecord-tableless"
       run "gem install --no-rdoc --no-ri mini_magick"
       run "gem install --no-rdoc --no-ri activemerchant -v=1.3.2"
       run "gem install --no-rdoc --no-ri tlsmail"
@@ -92,6 +93,6 @@ namespace :rake do
   end
   desc "Bootstrap the database (run the migrations, create admin account, load sample data.)"
   task :db_bootstrap do
-    run("cd #{deploy_to}/current; /usr/bin/rake production AUTO_ACCEPT=Y db:bootstrap")
+    run("cd #{deploy_to}/current; /usr/bin/rake AUTO_ACCEPT=Y db:bootstrap")
   end
 end
