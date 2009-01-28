@@ -32,6 +32,18 @@ case $RAILS_APPLICATION in
 4)
 	source apps/jobberrails.sh
 	;;
+5)
+	source apps/radiant.sh
+	source apps/eldorado.sh
+	source apps/jobberrails.sh
+	source apps/spree.sh
+	;;
+all)
+	source apps/radiant.sh
+	source apps/eldorado.sh
+	source apps/jobberrails.sh
+	source apps/spree.sh
+	;;
 *)
 	echo $RAILS_APPLICATION: That is an unknown option. Exiting... >&2
 	exit 1
