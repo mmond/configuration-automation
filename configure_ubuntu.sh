@@ -24,8 +24,8 @@ the target server and Rails application to deploy.  Possible configuration optio
 OS targets, different versions of Ruby/Rails/libraries, install locations, multiple server targets and Puppet/Chef.
   	
 The following software packages are installed:
-		Ruby 1.8.7			Rails 2.2.2	
-		Rubygems 1.3		Phusion Passenger
+		Ruby 1.8.7		Rails 2.2.2
+		Rubygems 1.3	Phusion Passenger
 		MySQL 5.0.67		
 		
 After the server is configured with Ruby, Rails and Phusion Passenger, a 'Hello World' Rails application 

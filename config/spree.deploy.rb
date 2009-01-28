@@ -70,7 +70,7 @@ namespace :deploy do
       run "gem install --no-rdoc --no-ri highline -v=1.4.0"
       run "gem install --no-rdoc --no-ri activerecord-tableless"
       run "gem install --no-rdoc --no-ri mini_magick"
-      run "gem install --no-rdoc --no-ri activemerchant -v=1.3.2"
+      run "gem install --no-rdoc --no-ri activemerchant -v=1.4.1"
       run "gem install --no-rdoc --no-ri tlsmail"
       run "gem install --no-rdoc --no-ri active_presenter"
   end
