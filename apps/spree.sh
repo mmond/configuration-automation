@@ -14,6 +14,8 @@ echo "In a moment Capistrano will request your password.
 cd ..
 git clone git://github.com/schof/spree.git spree
 cd spree/
+#	Freeze to known compatible revision 1.29.09
+git checkout 75d157ceafcd07505ed1ac829b36af4a403ac0b0
 capify .
 
 #	Use configuration-automation's spree deploy.rb

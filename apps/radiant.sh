@@ -19,6 +19,8 @@ echo "In a moment Capistrano will request your password.
 cd ..
 git clone git://github.com/radiant/radiant.git
 cd radiant/
+#	Freeze to known compatible revision 1.29.09
+git checkout efcee1767370ae84e0713a70113614ffac882227
 capify .
 
 #	Use configuration-automation's Radiant deploy.rb

@@ -14,6 +14,8 @@ echo "In a moment Capistrano will request your password.
 cd ..
 git clone git://github.com/jcnetdev/jobberrails.git jobberrails
 cd jobberrails/
+#	Freeze to known compatible revision 1.29.09
+git checkout 37d16c70cd965189174062176483dbf62800b46b
 
 #	Use configuration-automation's jobberRails deploy.rb
 #	Update the TARGET_SERVER placeholder in deploy.rb
