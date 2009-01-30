@@ -1,4 +1,5 @@
 #!/bin/bash
+exit 	# intentionally break master branch to confirm production is loaded and functional
 
 echo "
 
