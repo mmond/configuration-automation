@@ -11,8 +11,8 @@ fi
 #	download jobberRails from Github to ~/jobberRails 
 echo "In a moment Capistrano will request your password.
 "
-mkdir -p ../jobberrails/config
-cd ../jobberrails/
+mkdir -p jobberrails/config
+cd jobberrails/
 capify .
 
 
@@ -31,4 +31,4 @@ cp ../configuration-automation/config/jobberrails.database.yml config/database.y
 cap deploy:setup deploy:update deploy:upload_conf_files deploy:symlink_vhost deploy:haml_install deploy:rails_install rake:gems_install deploy:chown_web rake:db_create rake:db_schema_load rake:db_migrate passenger:restart
 
 #	Go back to configuration-automation root dir (to allow all app installs)
-cd ../configuration-automation
+cd ..
