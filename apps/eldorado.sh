@@ -9,8 +9,8 @@ fi
 #	download Eldorado from Github to ~/el-dorado 
 echo "Dowloading Eldorado...  In a moment Capistrano will request your password.
 "
-mkdir -p ../eldorado/config
-cd ../eldorado/
+mkdir -p eldorado/config
+cd eldorado/
 capify .
 
 #	Use configuration-automation's eldorado deploy.rb
@@ -28,4 +28,4 @@ cp ../configuration-automation/config/eldorado.database.yml config/database.yml
 cap deploy:setup deploy:update deploy:symlink_vhost deploy:upload_conf_files deploy:chown_web deploy:remove_htaccess rake:db_create rake:db_schema_load rake:db_migrate passenger:restart
 
 #	Go back to configuration-automation root dir (to allow all app installs)
-cd ../configuration-automation
+cd ..
