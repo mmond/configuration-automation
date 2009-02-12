@@ -27,9 +27,8 @@ role :db, domain, :primary => true
 
 set :repository, 'git://github.com/trevorturk/el-dorado.git'
 set :scm, :git
+set :branch, "dad33c7fe075753f0fa03cf96ca4b95fa3ac172d"
 set :deploy_via, :copy
-set :copy_cache, true
-set :git_shallow_clone, 1
 
 #############################################################
 #	Passenger

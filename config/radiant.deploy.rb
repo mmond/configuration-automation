@@ -28,8 +28,8 @@ role :db, domain, :primary => true
 set :repository, 'git://github.com/radiant/radiant.git'
 set :scm, :git
 set :deploy_via, :copy
-set :copy_cache, true
-set :git_shallow_clone, 1
+set :branch, "e88f129a9cb441bb0429b68a4767fa65b9a5c430"
+set :deploy_via, :copy
 
 #############################################################
 #	Passenger

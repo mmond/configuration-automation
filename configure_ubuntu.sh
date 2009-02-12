@@ -45,7 +45,7 @@ printf "Default (0): " ; read RAILS_APPLICATION
 
 #	Get the target server 
 if [ -z "${TARGET_SERVER}" ]; then 
-	echo "Please enter the remote server IP address or hostname:"
+	echo "Please enter the remote server hostname:"
 	read -e TARGET_SERVER
 fi
 

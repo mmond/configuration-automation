@@ -28,8 +28,8 @@ role :db, domain, :primary => true
 set :repository, 'git://github.com/jcnetdev/jobberrails.git'
 set :scm, :git
 set :deploy_via, :copy
-set :copy_cache, true
-set :git_shallow_clone, 1
+set :branch, "37d16c70cd965189174062176483dbf62800b46b"
+set :deploy_via, :copy
 
 #############################################################
 #	Passenger

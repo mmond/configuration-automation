@@ -9,11 +9,9 @@ fi
 #	download Eldorado from Github to ~/el-dorado 
 echo "Dowloading Eldorado...  In a moment Capistrano will request your password.
 "
-cd ..
-git clone git://github.com/trevorturk/el-dorado.git eldorado
-cd eldorado/
-#	Freeze to known compatible revision 1.29.09
-git checkout dad33c7fe075753f0fa03cf96ca4b95fa3ac172d
+mkdir -p ../eldorado/config
+cd ../eldorado/
+capify .
 
 #	Use configuration-automation's eldorado deploy.rb
 #	Update the TARGET_SERVER placeholder in deploy.rb

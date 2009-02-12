@@ -27,9 +27,8 @@ role :db, domain, :primary => true
 
 set :repository, 'git://github.com/schof/spree.git'
 set :scm, :git
+set :branch, "7450700c614e9951ccc2f937a996e9360bc7018e"
 set :deploy_via, :copy
-set :copy_cache, true
-set :git_shallow_clone, 1
 
 #############################################################
 #	Passenger
@@ -73,6 +72,7 @@ namespace :deploy do
       run "gem install --no-rdoc --no-ri activemerchant -v=1.4.1"
       run "gem install --no-rdoc --no-ri tlsmail"
       run "gem install --no-rdoc --no-ri active_presenter"
+      run "gem install --no-rdoc --no-ri searchlogic -v=1.6.3"
   end
   desc "Create MySQL database"
   task :create_db do
