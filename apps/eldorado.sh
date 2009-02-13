@@ -15,14 +15,14 @@ capify .
 
 #	Use configuration-automation's eldorado deploy.rb
 #	Update the TARGET_SERVER placeholder in deploy.rb
-cat ../config/eldorado.deploy.rb |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > eldorado/config/deploy.rb
+cat ../config/eldorado.deploy.rb |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > config/deploy.rb
 
 #	Use configuration-automation's eldorado vhost
 #	Update the TARGET_SERVER placeholder in the Apache vhost
-cat ../config/eldorado.vhost |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > eldorado/config/eldorado.vhost
+cat ../config/eldorado.vhost |sed "s/TARGET_SERVER/$TARGET_SERVER/g" > config/eldorado.vhost
 
 #	Use configuration-automation's eldorado database.yml
-cp ../config/eldorado.database.yml eldorado/config/database.yml
+cp ../config/eldorado.database.yml config/database.yml
 
 #	Use Capistrano to configure directory structure, Eldorado and servers
 cap deploy:setup deploy:update deploy:symlink_vhost deploy:upload_conf_files deploy:chown_web deploy:remove_htaccess rake:db_create rake:db_schema_load rake:db_migrate passenger:restart
